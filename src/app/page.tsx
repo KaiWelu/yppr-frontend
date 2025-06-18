@@ -1,6 +1,7 @@
 "use client";
 
 import LoginForm from "@/components/ui/LoginForm";
+import YpprBanner from "@/components/ui/YpprBanner";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -20,6 +21,7 @@ export default function Home() {
           visible ? "opacity-100" : "opacity-0"
         }`}
       >
+        <YpprBanner />
         <LoginForm />
       </div>
     </main>
