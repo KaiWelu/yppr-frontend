@@ -1,15 +1,20 @@
 "use client";
 
 import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 import { loginApi } from "@/api/authApi";
 import { useAuth } from "@/context/authProvider";
 
 const LoginForm = () => {
+  const router = useRouter();
   const { login, isAuthenticated, logout, token } = useAuth();
 
   const mutation = useMutation({
     mutationFn: loginApi,
-    onSuccess: (token) => login(token),
+    onSuccess: (token) => {
+      login(token);
+      router.push("/feed");
+    },
     onError: (err) => alert(err.message),
   });
 
@@ -25,25 +30,28 @@ const LoginForm = () => {
   };
 
   return (
-    <section className="w-full justify-items-center">
+    <section className="w-full justify-items-center font-primary font-light">
       {!isAuthenticated && !token && (
         <form
           onSubmit={handleSubmit}
-          className="bg-amber-200 flex flex-col p-4 gap-2"
+          className="flex flex-col p-4 gap-2 bg shadow-xl rounded-lg bg-white/50"
         >
           <input
             name="username"
             placeholder="Username"
-            className="bg-green-50 p-2"
+            className=" py-2 px-1 border-b-1 border-fuchsia-400"
           />
           <input
             name="password"
             placeholder="Password"
             type="password"
-            className="bg-green-50 p-2"
+            className="py-2 px-1 border-b-1 border-fuchsia-400"
           />
 
-          <button type="submit" className="bg-green-300">
+          <button
+            type="submit"
+            className="bg-fuchsia-400 text-white font-semibold py-2 text-xl mt-4"
+          >
             Login
           </button>
         </form>
