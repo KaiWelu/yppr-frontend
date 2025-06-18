@@ -1,8 +1,9 @@
 export const loginApi = async (credentials: {
-  username: string;
+  name: string;
   password: string;
 }) => {
-  const res = await fetch("/api/login", {
+  console.log(credentials);
+  const res = await fetch("http://localhost:8080/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(credentials),
@@ -14,5 +15,6 @@ export const loginApi = async (credentials: {
   }
 
   const data = await res.json(); // Should return { token: "..." }
+  console.log(data);
   return data.token;
 };
