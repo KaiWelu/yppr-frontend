@@ -5,7 +5,7 @@ import { loginApi } from "@/api/authApi";
 import { useAuth } from "@/context/authProvider";
 
 const LoginForm = () => {
-  const { login } = useAuth();
+  const { login, isAuthenticated, logout, token } = useAuth();
 
   const mutation = useMutation({
     mutationFn: loginApi,
@@ -25,11 +25,39 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input name="username" placeholder="Username" />
-      <input name="password" placeholder="Password" type="password" />
-      <button type="submit">Login</button>
-    </form>
+    <section className="w-full justify-items-center">
+      {!isAuthenticated && !token && (
+        <form
+          onSubmit={handleSubmit}
+          className="bg-amber-200 flex flex-col p-4 gap-2"
+        >
+          <input
+            name="username"
+            placeholder="Username"
+            className="bg-green-50 p-2"
+          />
+          <input
+            name="password"
+            placeholder="Password"
+            type="password"
+            className="bg-green-50 p-2"
+          />
+
+          <button type="submit" className="bg-green-300">
+            Login
+          </button>
+        </form>
+      )}
+      {isAuthenticated && token && (
+        <div className="bg-amber-200 flex flex-col p-4 gap-2">
+          <p>User is loggend in with token </p>
+          <p>{localStorage.getItem("token")}</p>
+          <button className="bg-red-300 p-2" onClick={logout}>
+            Logout
+          </button>
+        </div>
+      )}
+    </section>
   );
 };
 
