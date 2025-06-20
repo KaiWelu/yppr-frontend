@@ -1,4 +1,4 @@
-"use client";
+/* "use client";
 
 import { useMutation } from "@tanstack/react-query";
 import { loginApi } from "@/api/authApi";
@@ -9,8 +9,8 @@ const useLogin = () => {
 
   const mutation = useMutation({
     mutationFn: loginApi,
-    onSuccess: (token: string) => {
-      login(token); // store in localStorage or context
+    onSuccess: ({ token, username }) => {
+      login(token, username); // store in localStorage or context
     },
     onError: (err: any) => {
       console.log("Login error: " + err.message);
@@ -19,3 +19,4 @@ const useLogin = () => {
 };
 
 export default useLogin;
+ */

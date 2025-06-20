@@ -3,6 +3,7 @@ import "./globals.css";
 import Providers from "./provider";
 import { AuthProvider } from "@/context/authProvider";
 import { Outfit } from "next/font/google";
+import NavBar from "@/components/ui/NavBar";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -23,7 +24,12 @@ export default function RootLayout({
     <html lang="en" className={outfit.variable}>
       <body className="font-outfit">
         <Providers>
-          <AuthProvider>{children}</AuthProvider>
+          <AuthProvider>
+            <div className="h-screen w-full bg-linear-to-bl/longer from-yellow-200 via-orange-200 to-indigo-300">
+              <NavBar />
+              {children}
+            </div>
+          </AuthProvider>
         </Providers>
       </body>
     </html>

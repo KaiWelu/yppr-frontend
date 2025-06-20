@@ -7,12 +7,12 @@ import { useAuth } from "@/context/authProvider";
 
 const LoginForm = () => {
   const router = useRouter();
-  const { login, isAuthenticated, logout, token } = useAuth();
+  const { login, isAuthenticated, logout, token, username } = useAuth();
 
   const mutation = useMutation({
     mutationFn: loginApi,
-    onSuccess: (token) => {
-      login(token);
+    onSuccess: ({ token, username }) => {
+      login(token, username);
       router.push("/feed");
     },
     onError: (err) => alert(err.message),

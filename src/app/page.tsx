@@ -14,7 +14,7 @@ export default function Home() {
 
   return (
     //<main className="relative h-screen w-full [&>div]:absolute [&>div]:top-0 [&>div]:left-0 [&>div]:z-[-2] [&>div]:h-full [&>div]:w-full [&>div]:bg-gradient-to-r [&>div]:from-red-200 [&>div]:to-yellow-200">
-    <main className="h-screen w-full bg-linear-to-bl/longer from-yellow-200 via-orange-200 to-indigo-300">
+    <main className="">
       <div className="text-black p-5 font-primary font-light">HALO</div>
       <div
         className={`transition-opacity duration-700 ease-in-out ${
