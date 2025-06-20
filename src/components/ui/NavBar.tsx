@@ -1,18 +1,33 @@
 "use client";
 import React from "react";
 import { useAuth } from "@/context/authProvider";
+import { useRouter } from "next/navigation";
 
 const NavBar = () => {
-  const { token, isAuthenticated } = useAuth();
+  const { token, isAuthenticated, username, logout } = useAuth();
+  const router = useRouter();
 
-  /*  return  (isAuthenticated <nav className="flex flex-row justify-between bg-white">
-      <p className="text-2xl font-bold">YPPR</p>
-    </nav> ) */
+  const handleLogout = () => {
+    logout();
+    router.push("/");
+  };
+
   if (!token && !isAuthenticated) return null;
   return (
     <div className="w-full flex justify-center bg-transparent top z-50 sticky font-primary">
-      <nav className="bg-white/60 w-full md:w-2/3 h-12 flex items-center justify-between px-4 shadow-md mt-0 md:mt-2">
-        <p className="text-2xl font-bold text-fuchsia-400">YPPR</p>
+      <nav className="bg-white/45 w-full h-12 flex items-center justify-between px-4 shadow-md mt-0 md:mt-2">
+        <p className="text-2xl font-bold bg-fuchsia-400 text-white px-2 rounded-md">
+          YPPR
+        </p>
+        <div className="flex flex-row gap-3 justify-center items-center">
+          <p className="">{username}</p>
+          <button
+            className="bg-red-300 p-1 rounded-md shadow-md"
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
+        </div>
       </nav>
     </div>
   );

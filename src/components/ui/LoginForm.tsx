@@ -7,7 +7,7 @@ import { useAuth } from "@/context/authProvider";
 
 const LoginForm = () => {
   const router = useRouter();
-  const { login, isAuthenticated, logout, token, username } = useAuth();
+  const { login, isAuthenticated, token } = useAuth();
 
   const mutation = useMutation({
     mutationFn: loginApi,
@@ -56,7 +56,7 @@ const LoginForm = () => {
           </button>
         </form>
       )}
-      {isAuthenticated && token && (
+      {/* {isAuthenticated && token && (
         <div className="bg-amber-200 flex flex-col p-4 gap-2">
           <p>User is loggend in with token </p>
           <p>{localStorage.getItem("token")}</p>
@@ -64,7 +64,7 @@ const LoginForm = () => {
             Logout
           </button>
         </div>
-      )}
+      )} */}
     </section>
   );
 };
