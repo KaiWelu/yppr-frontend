@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import api from "@/api/axios";
 import { Post } from "@/types/Post";
+import { useAuth } from "@/context/authProvider";
 
 const fetchProtectedPosts = async (token: string): Promise<Post[]> => {
   const response = await api.get<Post[]>("/posts", {
@@ -11,14 +12,9 @@ const fetchProtectedPosts = async (token: string): Promise<Post[]> => {
   return response.data;
 };
 
-/* export const useProtectedPosts = (token: string) => {
-  return useQuery(["protected-posts"], () => fetchProtectedPosts(token), {
-    
-  }  
-  );
-};
- */
-export const useProtectedPosts = (token: string) => {
+export const useProtectedPosts = () => {
+  const { token } = useAuth(); // this gets the token from the context
+
   return useQuery({
     queryKey: ["portected-posts"],
     queryFn: () => fetchProtectedPosts(token),
