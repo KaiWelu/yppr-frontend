@@ -25,9 +25,11 @@ export default function RootLayout({
       <body className="font-outfit">
         <Providers>
           <AuthProvider>
-            <div className="h-screen w-full bg-linear-to-bl/longer from-yellow-200 via-orange-200 to-indigo-300">
-              <NavBar />
-              {children}
+            <div className="h-screen w-full flex justify-center bg-linear-to-bl/longer from-yellow-200 via-orange-200 to-indigo-300">
+              <div className="w-full md:w-3/4">
+                <NavBar />
+                {children}
+              </div>
             </div>
           </AuthProvider>
         </Providers>

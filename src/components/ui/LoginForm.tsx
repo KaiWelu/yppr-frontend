@@ -11,8 +11,8 @@ const LoginForm = () => {
 
   const mutation = useMutation({
     mutationFn: loginApi,
-    onSuccess: ({ token, username }) => {
-      login(token, username);
+    onSuccess: (token) => {
+      login(token);
       router.push("/feed");
     },
     onError: (err) => alert(err.message),

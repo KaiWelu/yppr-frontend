@@ -1,5 +1,6 @@
 "use client";
 
+import { getUsernameFromToken } from "@/api/getUsernameFromToken";
 import { createContext, useContext, useState, useEffect } from "react";
 
 const AuthContext = createContext<any>(null);
@@ -11,23 +12,19 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     // Only run on client
     const storedToken = localStorage.getItem("token");
-    const storedUsername = localStorage.getItem("username");
     if (storedToken) setToken(storedToken);
-    if (storedUsername) setUsername(storedUsername);
   }, []);
 
-  const login = (jwt: string, user: string) => {
+  const login = (jwt: string) => {
     localStorage.setItem("token", jwt);
-    localStorage.setItem("username", user);
+    setUsername(getUsernameFromToken(jwt));
+    console.log("Username from token: " + getUsernameFromToken(jwt));
     setToken(jwt);
-    setUsername(user);
   };
 
   const logout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("username");
     setToken(null);
-    setUsername(null);
   };
 
   const isAuthenticated = !!token;
