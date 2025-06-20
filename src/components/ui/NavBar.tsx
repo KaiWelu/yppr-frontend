@@ -15,8 +15,8 @@ const NavBar = () => {
   if (!token && !isAuthenticated) return null;
   return (
     <div className="w-full flex justify-center bg-transparent top z-50 sticky font-primary">
-      <nav className="bg-white/45 w-full h-12 flex items-center justify-between px-4 shadow-md mt-0 md:mt-2">
-        <p className="text-2xl font-bold bg-fuchsia-400 text-white px-2 rounded-md">
+      <nav className="bg-white/70 w-full h-16 flex items-center justify-between px-4 shadow-md mt-0 md:mt-2">
+        <p className="text-3xl font-bold bg-fuchsia-400 text-white px-3 py-1 rounded-md shadow-md">
           YPPR
         </p>
         <div className="flex flex-row gap-3 justify-center items-center">

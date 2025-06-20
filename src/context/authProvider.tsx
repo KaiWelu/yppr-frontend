@@ -12,18 +12,23 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     // Only run on client
     const storedToken = localStorage.getItem("token");
+    const storedUsername = localStorage.getItem("username");
     if (storedToken) setToken(storedToken);
+    if (storedUsername) setUsername(storedUsername);
   }, []);
 
   const login = (jwt: string) => {
     localStorage.setItem("token", jwt);
+
     setUsername(getUsernameFromToken(jwt));
-    console.log("Username from token: " + getUsernameFromToken(jwt));
+    localStorage.setItem("username", getUsernameFromToken(jwt) || "");
     setToken(jwt);
   };
 
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    setUsername(null);
     setToken(null);
   };
 
