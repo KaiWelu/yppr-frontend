@@ -10,7 +10,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [username, setUsername] = useState<string | null>(null);
 
   useEffect(() => {
-    // Only run on client
     const storedToken = localStorage.getItem("token");
     const storedUsername = localStorage.getItem("username");
     if (storedToken) setToken(storedToken);

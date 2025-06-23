@@ -9,6 +9,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-primary: "Outfit", "sans serif";
+  --font-comic: "Comic_Neue", "sans serif";
 }
 
 @media (prefers-color-scheme: dark) {
