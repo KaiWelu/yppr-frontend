@@ -17,7 +17,6 @@ const Feed = () => {
     <>
       {token && isAuthenticated && (
         <div className="mb-10">
-          <CreatePostForm />
           <div className="mt-10 flex flex-col gap-6 pb-10">
             {data?.pages.flatMap((page) =>
               page.content.map((post) => <PostCard key={post.id} post={post} />)

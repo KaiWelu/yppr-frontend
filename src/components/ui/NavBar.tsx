@@ -1,11 +1,14 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useAuth } from "@/context/authProvider";
 import { useRouter } from "next/navigation";
+import CreatePostModal from "./CreatePostModal";
 
 const NavBar = () => {
   const { token, isAuthenticated, username, logout } = useAuth();
   const router = useRouter();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleLogout = () => {
     logout();
@@ -19,6 +22,12 @@ const NavBar = () => {
         <p className="text-3xl font-bold bg-purple-500 text-white px-3 py-1 rounded-md shadow-md">
           YPPR
         </p>
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className="bg-purple-500 p-2 text-white font-semibold rounded-md shadow-md"
+        >
+          New Yap!
+        </button>
         <div className="flex flex-row gap-3 justify-center items-center">
           <p className="">{username}</p>
           <button
@@ -29,6 +38,10 @@ const NavBar = () => {
           </button>
         </div>
       </nav>
+      <CreatePostModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      ></CreatePostModal>
     </div>
   );
 };
