@@ -8,6 +8,7 @@ import { Post } from "@/types/Post";
 import { PaginatedResponse } from "@/types/PaginatedResponse";
 import { useAuth } from "@/context/authProvider";
 import { PostResponse } from "@/types/PostResponse";
+import { PostRequest } from "@/types/PostRequest";
 
 const fetchPaginatedPosts = async ({
   pageParam = 0,
@@ -61,6 +62,38 @@ export const useCreatePost = (onSuccessCallback?: () => void) => {
     mutationFn: (newPost: Post) => createPost(newPost, token),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["paginated-posts"] }); // this will invalidate and refetch after creation
+      if (onSuccessCallback) onSuccessCallback(); // this will call a callback function on success
+    },
+  });
+};
+
+const updatePost = async (
+  id: number,
+  updatedPost: PostRequest,
+  token: string
+) => {
+  const response = await api.put<PostRequest>(`/posts/${id}`, updatedPost, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+};
+
+export const useUpdatePost = (onSuccessCallback?: () => void) => {
+  const { token } = useAuth();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({
+      id,
+      updatedPost,
+    }: {
+      id: number;
+      updatedPost: PostRequest;
+    }) => updatePost(id, updatedPost, token),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["paginated-posts"] });
       if (onSuccessCallback) onSuccessCallback(); // this will call a callback function on success
     },
   });

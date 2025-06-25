@@ -20,12 +20,7 @@ const CreatePostModal = ({ isOpen, onClose }: ModalProps) => {
     setTitle("");
   };
 
-  const {
-    mutate: createPost,
-    isPending,
-    isError,
-    err,
-  } = useCreatePost(() => {
+  const { mutate: createPost } = useCreatePost(() => {
     handleReset(); // this will run un success and reset the form
     onClose(); // this will close the modal
   });

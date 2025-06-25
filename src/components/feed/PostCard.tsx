@@ -24,23 +24,19 @@ const PostCard = ({ post }: { post: PostResponse }) => {
             {post.userName}{" "}
           </span>
         </div>
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="bg-purple-800 text-white rounded-md shadow-sm font-semibold px-1"
-        >
-          Edit
-        </button>
+        {username === post.userName && (
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="bg-red-500 text-white rounded-md shadow-sm font-semibold px-1"
+          >
+            Edit
+          </button>
+        )}
         <EditPostModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           post={post}
         />
-
-        {/* {username === post.userName && (
-          <div className="text-sm text-purple-500 font-semibold underline decoration-purple-500 w-fit flex items-center justify-center">
-            {post.userName}
-          </div>
-        )} */}
       </div>
     </div>
   );

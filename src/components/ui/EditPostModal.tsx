@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDeletePost } from "@/hooks/usePosts";
 import { useAuth } from "@/context/authProvider";
 import { PostResponse } from "@/types/PostResponse";
+import { useUpdatePost } from "@/hooks/usePosts";
+import { PostRequest } from "@/types/PostRequest";
 
 interface ModalProps {
   isOpen: boolean;
@@ -17,6 +19,7 @@ const EditPostModal = ({ isOpen, onClose, post }: ModalProps) => {
   const { username } = useAuth();
 
   const { mutate: deletePost } = useDeletePost(() => onClose());
+  const { mutate: updatePost } = useUpdatePost(() => onClose());
 
   /* const { mutate: createPost } = useCreatePost(() => {
     onClose(); // this will close the modal
@@ -25,6 +28,17 @@ const EditPostModal = ({ isOpen, onClose, post }: ModalProps) => {
   const handleDeletePost = (e: React.FormEvent) => {
     e.preventDefault();
     deletePost(post.id);
+  };
+
+  const handleUpdatePost = (e: React.FormEvent) => {
+    e.preventDefault();
+    const updatedPost: PostRequest = {
+      title,
+      content,
+      userName: username,
+      tags: [],
+    };
+    updatePost({ id: post.id, updatedPost }); // sends the parameters as object
   };
 
   // this will disable scrolling if the modal is open
@@ -78,6 +92,7 @@ const EditPostModal = ({ isOpen, onClose, post }: ModalProps) => {
           <button
             type="submit"
             className="bg-purple-500 text-white font-semibold py-2 text-xl"
+            onClick={handleUpdatePost}
           >
             Save
           </button>
