@@ -1,4 +1,4 @@
-"use client";
+/* "use client";
 
 // this hook is not in use right now
 
@@ -21,3 +21,4 @@ const useLogin = () => {
 };
 
 export default useLogin;
+ */

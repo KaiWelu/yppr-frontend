@@ -4,6 +4,7 @@ import Providers from "./provider";
 import { AuthProvider } from "@/context/authProvider";
 import { Outfit, Comic_Neue } from "next/font/google";
 import NavBar from "@/components/ui/NavBar";
+import Feed from "@/components/feed/Feed";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -28,6 +29,7 @@ export default function RootLayout({
             <div className="min-h-screen w-full flex justify-center bg-linear-to-bl/longer from-yellow-200 via-orange-200 to-indigo-300">
               <div className="w-full md:w-10/12 lg:w-1/2">
                 <NavBar />
+                <Feed />
                 {children}
               </div>
             </div>

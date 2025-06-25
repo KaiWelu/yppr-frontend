@@ -1,8 +1,9 @@
 "use client";
 import React from "react";
-import { useProtectedPosts } from "@/hooks/useProtectedPosts";
+import { useProtectedPosts } from "@/hooks/usePosts";
 import { Post } from "@/types/Post";
 import CreatePostForm from "@/components/ui/CreatePostForm";
+import NavBar from "@/components/ui/NavBar";
 
 const Feed = () => {
   const { data, isLoading, isError } = useProtectedPosts();
@@ -12,6 +13,7 @@ const Feed = () => {
 
   return (
     <div>
+      <NavBar />
       <CreatePostForm />
       <div className="mt-10 flex flex-col gap-6 pb-10">
         {data?.map((post: Post) => (
