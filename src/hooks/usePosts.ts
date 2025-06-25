@@ -65,3 +65,24 @@ export const useCreatePost = (onSuccessCallback?: () => void) => {
     },
   });
 };
+
+const deletePost = async (id: number, token: string) => {
+  await api.delete(`/posts/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+export const useDeletePost = (onSuccessCallback?: () => void) => {
+  const { token } = useAuth();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (id: number) => deletePost(id, token),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["paginated-posts"] });
+      if (onSuccessCallback) onSuccessCallback(); // this will call a callback function on success
+    },
+  });
+};

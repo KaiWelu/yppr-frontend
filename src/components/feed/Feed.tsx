@@ -2,7 +2,6 @@
 import React from "react";
 import { useInfinitePaginatedPosts } from "@/hooks/usePosts";
 import { useAuth } from "@/context/authProvider";
-import CreatePostForm from "@/components/ui/CreatePostForm";
 import PostCard from "./PostCard";
 
 const Feed = () => {
