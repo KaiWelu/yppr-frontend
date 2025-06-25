@@ -3,6 +3,7 @@ import React from "react";
 import { useAuth } from "@/context/authProvider";
 import { getFormattedDate } from "@/util/getFormattedDate";
 import { useState } from "react";
+import { motion } from "motion/react";
 import EditPostModal from "../ui/EditPostModal";
 
 const PostCard = ({ post }: { post: PostResponse }) => {
@@ -10,7 +11,15 @@ const PostCard = ({ post }: { post: PostResponse }) => {
   const { username } = useAuth();
 
   return (
-    <div className="bg-white/90 rounded-md py-3 px-4 mx-2 shadow-sm">
+    <motion.div
+      initial={{ scale: 0.5, opacity: 0.5 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={{
+        duration: 0.5,
+        scale: { type: "spring", visualDuration: 0.5, bounce: 0.1 },
+      }}
+      className="bg-white/90 rounded-md py-3 px-4 mx-2 shadow-sm"
+    >
       <h2 className="text-3xl font-primary  underline decoration-purple-500 mb-1">
         {post.title}
       </h2>
@@ -38,7 +47,7 @@ const PostCard = ({ post }: { post: PostResponse }) => {
           post={post}
         />
       </div>
-    </div>
+    </motion.div>
   );
 };
 

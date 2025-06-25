@@ -13,7 +13,7 @@ import { PostRequest } from "@/types/PostRequest";
 const fetchPaginatedPosts = async ({
   pageParam = 0,
   token,
-  sort = "createdAt,asc",
+  sort = "createdAt,desc",
 }: {
   pageParam?: number;
   token: string;
