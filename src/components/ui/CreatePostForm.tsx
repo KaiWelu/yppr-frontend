@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useAuth } from "@/context/authProvider";
-import { useCreatePost } from "@/hooks/useProtectedPosts";
+import { useCreatePost } from "@/hooks/usePosts";
 import React from "react";
-import { Post } from "@/types/Post";
+import { PostRequest } from "@/types/PostRequest";
 
 const CreatePostForm = () => {
   //state management for the form
@@ -14,13 +14,15 @@ const CreatePostForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const newPost: Post = {
+    const newPost: PostRequest = {
       title,
       content,
       userName: username,
       tags: [],
     };
     createPost(newPost);
+    setContent("");
+    setTitle("");
   };
 
   return (
