@@ -45,17 +45,6 @@ export const useInfinitePaginatedPosts = () => {
   });
 };
 
-/* export const usePaginatedPosts = (page: number, size: number = 5) => {
-  const { token } = useAuth();
-
-  return useQuery({
-    queryKey: ["paginated-posts", page, size],
-    queryFn: () => fetchPaginatedPosts(token, page, size),
-    enabled: !!token,
-    placeholderData: (prevData) => prevData, // this will keep the previous data
-  });
-};
- */
 const createPost = async (newPost: Post, token: string) => {
   const response = await api.post<Post>("/posts", newPost, {
     headers: {
@@ -65,23 +54,14 @@ const createPost = async (newPost: Post, token: string) => {
   return response.data;
 };
 
-/* export const useProtectedPosts = () => {
-  const { token } = useAuth(); // this gets the token from the context
-
-  return useQuery({
-    queryKey: ["protected-posts"],
-    queryFn: () => fetchProtectedPosts(token),
-    enabled: !!token, // only does a fetch if a token exists
-  });
-}; */
-
-export const useCreatePost = () => {
+export const useCreatePost = (onSuccessCallback?: () => void) => {
   const { token } = useAuth(); // this gets the token from the context
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (newPost: Post) => createPost(newPost, token),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["paginated-posts"] }); // this will invalidate and refetch after creation
+      if (onSuccessCallback) onSuccessCallback(); // this will call a callback function on success
     },
   });
 };

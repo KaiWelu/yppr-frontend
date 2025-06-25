@@ -21,7 +21,7 @@ const Feed = () => {
             {data?.pages.flatMap((page) =>
               page.content.map((post) => (
                 <div
-                  key={post.title}
+                  key={post.id}
                   className="bg-white/90 rounded-md px-4 py-3 mx-2 relative shadow-sm"
                 >
                   <h2 className="text-2xl font-primary  underline decoration-purple-500 mb-3">

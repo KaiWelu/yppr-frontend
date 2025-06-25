@@ -10,7 +10,18 @@ const CreatePostForm = () => {
   const [content, setContent] = useState("");
 
   const { isAuthenticated, token, username } = useAuth();
-  const { mutate: createPost, isPending, isError, err } = useCreatePost();
+
+  const handleReset = () => {
+    setContent("");
+    setTitle("");
+  };
+
+  const {
+    mutate: createPost,
+    isPending,
+    isError,
+    err,
+  } = useCreatePost(handleReset); // this will run un success and reset the form
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,8 +32,6 @@ const CreatePostForm = () => {
       tags: [],
     };
     createPost(newPost);
-    setContent("");
-    setTitle("");
   };
 
   return (
@@ -36,12 +45,14 @@ const CreatePostForm = () => {
             name="title"
             placeholder="Title"
             className=" py-2 px-2 bg-purple-100"
+            value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
           <textarea
             name="content"
             placeholder="Yap it out..."
             className="py-2 px-2  bg-purple-100"
+            value={content}
             onChange={(e) => setContent(e.target.value)}
           />
 

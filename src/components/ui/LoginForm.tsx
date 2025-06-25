@@ -1,19 +1,16 @@
 "use client";
 
 import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
 import { loginApi } from "@/api/authApi";
 import { useAuth } from "@/context/authProvider";
 
 const LoginForm = () => {
-  const router = useRouter();
   const { login, isAuthenticated, token } = useAuth();
 
   const mutation = useMutation({
     mutationFn: loginApi,
     onSuccess: (token) => {
       login(token);
-      /* router.push("/feed"); */
     },
     onError: (err) => alert(err.message),
   });
