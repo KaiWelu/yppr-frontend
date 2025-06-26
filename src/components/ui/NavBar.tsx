@@ -53,9 +53,9 @@ const NavBar = () => {
           }}
         >
           <p className="text-xl hidden sm:block">New Post</p>
-          <motion.div whileHover={{ scale: 1.2 }}>
+          <motion.div whileHover={{ scale: 1.3 }}>
             <SquarePlus
-              size={32}
+              size={26}
               strokeWidth={1.7}
               className="text-purple-500 hover:text-purple-600"
             />

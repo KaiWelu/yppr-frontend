@@ -1,9 +1,10 @@
-import { PostResponse } from "@/types/PostResponse";
 import React from "react";
+import { PostResponse } from "@/types/PostResponse";
 import { useAuth } from "@/context/authProvider";
 import { getFormattedDate } from "@/util/getFormattedDate";
 import { useState } from "react";
 import { motion } from "motion/react";
+import { SquarePen } from "lucide-react";
 import EditPostModal from "../ui/EditPostModal";
 
 const PostCard = ({ post }: { post: PostResponse }) => {
@@ -22,22 +23,21 @@ const PostCard = ({ post }: { post: PostResponse }) => {
     >
       <h2 className="text-3xl font-primary mb-1">{post.title}</h2>
       <p className="font-quicksand font-light text-lg">{post.content}</p>
-      <p className="font-primary text-sm font-light mt-2">
-        Posted at:{" " + getFormattedDate(post.createdAt)}
-      </p>
-      <div className="h-8 rounded-md flex flex-row justify-between mt-4 gap-2">
+      <p className="text-purple-400 font-semibold mt-2">{post.userName} </p>
+      <div className="h-8 rounded-md flex flex-row justify-between">
         <div className="text-sm text-black font-primary w-fit flex items-center">
-          <span className="bg-purple-200 p-1 rounded-md mr-2">
-            {post.userName}{" "}
-          </span>
+          <p className="font-primary font-light">
+            Posted at:{" " + getFormattedDate(post.createdAt)}
+          </p>
         </div>
         {username === post.userName && (
-          <button
+          <motion.button
+            whileHover={{ scale: 1.2 }}
             onClick={() => setIsModalOpen(true)}
-            className="bg-red-500 text-white rounded-md shadow-sm font-semibold px-1"
+            className="text-purple-400 hover:text-pink-400"
           >
-            Edit
-          </button>
+            <SquarePen size={22} />
+          </motion.button>
         )}
         <EditPostModal
           isOpen={isModalOpen}
