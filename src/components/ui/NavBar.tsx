@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import CreatePostModal from "./CreatePostModal";
 import { motion } from "motion/react";
 import { toast } from "react-toastify";
-import { SquarePlus } from "lucide-react";
+import { SquarePlus, LogOut } from "lucide-react";
 
 const NavBar = () => {
   const { token, isAuthenticated, username, logout } = useAuth();
@@ -31,45 +31,54 @@ const NavBar = () => {
         transition={{ duration: 0.5, ease: "easeOut" }}
         className="bg-white/90 backdrop-blur-md w-full h-16 flex items-center justify-between px-4 shadow-md mt-0 md:mt-2"
       >
-        <div className="flex flex-row gap-2">
+        <div className="flex flex-row gap-4">
           <p
             onClick={handleToast}
             className="text-3xl font-bold bg-purple-500 text-white px-3 py-1 rounded-md shadow-md"
           >
             YPPR
           </p>
+          <p className="flex justify-center items-center text-xl text-purple-400">
+            {username}
+          </p>
         </div>
-        <motion.button
-          onClick={() => setIsModalOpen(true)}
-          className="flex flex-row justify-center items-center gap-2 p-2"
-          animate={{
-            rotate: [0, -2, 2, -2, 2, 0], // wiggle keyframes
-          }}
-          transition={{
-            duration: 0.3,
-            repeat: Infinity,
-            repeatDelay: 12, // wait 2 seconds between wiggles
-            ease: "easeInOut",
-          }}
-        >
-          <p className="text-xl hidden sm:block">New Post</p>
-          <motion.div whileHover={{ scale: 1.3 }}>
-            <SquarePlus
-              size={26}
-              strokeWidth={1.7}
-              className="text-purple-500 hover:text-purple-600"
-            />
-          </motion.div>
-        </motion.button>
 
         <div className="flex flex-row gap-3 justify-center items-center">
-          <p className="">{username}</p>
-          <button
-            className="bg-purple-500 text-white font-semibold p-1 text-md rounded-md shadow-md"
-            onClick={handleLogout}
+          <motion.button
+            onClick={() => setIsModalOpen(true)}
+            className="flex flex-row justify-center items-center gap-2 p-2"
+            animate={{
+              rotate: [0, -2, 2, -2, 2, 0], // wiggle keyframes
+            }}
+            transition={{
+              duration: 0.3,
+              repeat: Infinity,
+              repeatDelay: 12, // wait 2 seconds between wiggles
+              ease: "easeInOut",
+            }}
           >
-            Logout
-          </button>
+            <p className="text-xl hidden sm:block">New Post</p>
+            <motion.div whileHover={{ scale: 1.3 }}>
+              <SquarePlus
+                size={26}
+                strokeWidth={1.7}
+                className="text-purple-500 hover:text-purple-600"
+              />
+            </motion.div>
+          </motion.button>
+          <motion.button
+            onClick={handleLogout}
+            className="flex flex-row justify-center items-center gap-2 p-2"
+          >
+            <p className="text-xl hidden sm:block">Logout</p>
+            <motion.div whileHover={{ scale: 1.3 }}>
+              <LogOut
+                size={26}
+                strokeWidth={1.7}
+                className="text-purple-500 hover:text-purple-600"
+              />
+            </motion.div>
+          </motion.button>
         </div>
       </motion.nav>
       <CreatePostModal
