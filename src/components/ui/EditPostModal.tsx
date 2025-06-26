@@ -33,11 +33,12 @@ const EditPostModal = ({ isOpen, onClose, post }: ModalProps) => {
   const handleUpdatePost = (e: React.FormEvent) => {
     e.preventDefault();
     const updatedPost: PostRequest = {
-      title,
-      content,
+      title: title,
+      content: content,
       userName: username,
       tags: [],
     };
+    console.log(updatedPost);
     updatePost({ id: post.id, updatedPost }); // sends the parameters as object
   };
 

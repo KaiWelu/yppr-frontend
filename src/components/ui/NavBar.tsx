@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import CreatePostModal from "./CreatePostModal";
 import { motion } from "motion/react";
 import { toast } from "react-toastify";
+import { SquarePlus } from "lucide-react";
 
 const NavBar = () => {
   const { token, isAuthenticated, username, logout } = useAuth();
@@ -30,19 +31,37 @@ const NavBar = () => {
         transition={{ duration: 0.5, ease: "easeOut" }}
         className="bg-white/90 backdrop-blur-md w-full h-16 flex items-center justify-between px-4 shadow-md mt-0 md:mt-2"
       >
-        <p
-          onClick={handleToast}
-          className="text-3xl font-bold bg-purple-500 text-white px-3 py-1 rounded-md shadow-md"
-        >
-          YPPR
-        </p>
+        <div className="flex flex-row gap-2">
+          <p
+            onClick={handleToast}
+            className="text-3xl font-bold bg-purple-500 text-white px-3 py-1 rounded-md shadow-md"
+          >
+            YPPR
+          </p>
+        </div>
         <motion.button
-          whileHover={{ scale: 1.2 }}
           onClick={() => setIsModalOpen(true)}
-          className="bg-purple-500 p-2 text-white font-semibold rounded-md shadow-md"
+          className="flex flex-row justify-center items-center gap-2 p-2"
+          animate={{
+            rotate: [0, -2, 2, -2, 2, 0], // wiggle keyframes
+          }}
+          transition={{
+            duration: 0.3,
+            repeat: Infinity,
+            repeatDelay: 12, // wait 2 seconds between wiggles
+            ease: "easeInOut",
+          }}
         >
-          New Yap!
+          <p className="text-xl">New Post</p>
+          <motion.div whileHover={{ scale: 1.2 }}>
+            <SquarePlus
+              size={32}
+              strokeWidth={1.7}
+              className="text-purple-500 hover:text-pink-200"
+            />
+          </motion.div>
         </motion.button>
+
         <div className="flex flex-row gap-3 justify-center items-center">
           <p className="">{username}</p>
           <button

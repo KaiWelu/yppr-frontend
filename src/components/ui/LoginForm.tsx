@@ -4,24 +4,36 @@ import { useMutation } from "@tanstack/react-query";
 import { loginApi } from "@/api/authApi";
 import { useAuth } from "@/context/authProvider";
 import { toast } from "react-toastify";
+import { motion } from "motion/react";
+import { useState } from "react";
+import { AxiosError } from "axios";
 
 const LoginForm = () => {
   const { login, logout, isAuthenticated, token } = useAuth();
+  const [isRegistration, setIsRegistration] = useState(false);
 
   const mutation = useMutation({
     mutationFn: loginApi,
     onSuccess: (token) => {
       login(token);
     },
-    onError: (err) => {
-      logout();
-      console.log(err);
-      toast.error("Something login related went wrong lol");
-    }, // this can be a toast
+    onError: (err: AxiosError) => {
+      // this ensures correct typing of the error response
+      const errorData = err.response?.data as Record<string, string>;
+      console.log(errorData);
+      if (errorData && typeof errorData === "object") {
+        Object.entries(errorData).forEach((message) => {
+          toast.error(message[1]);
+        });
+      }
+    },
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (isRegistration) return; //prevents submits while the registration form is open
+
     const form = e.target as HTMLFormElement;
     const name = (form.elements.namedItem("username") as HTMLInputElement)
       .value;
@@ -43,19 +55,60 @@ const LoginForm = () => {
             placeholder="Username"
             className=" py-2 px-1 border-b-1 border-purple-500"
           />
+          {isRegistration && !isAuthenticated && !token && (
+            <motion.input
+              initial={{ y: -100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              name="email"
+              placeholder="E-Mail"
+              className=" py-2 px-1 border-b-1 border-purple-500"
+            />
+          )}
           <input
             name="password"
             placeholder="Password"
             type="password"
             className="py-2 px-1 border-b-1 border-purple-500"
           />
-
-          <button
-            type="submit"
-            className="bg-purple-500 text-white font-semibold py-2 text-xl mt-4"
-          >
-            Login
-          </button>
+          {isRegistration ? (
+            <div className="flex flex-col gap-2 mt-4">
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                type="button"
+                className="bg-red-300 hover:bg-red-400 text-white font-semibold py-2 text-xl rounded-md shadow-md"
+                onClick={() => setIsRegistration(false)}
+              >
+                Cancel
+              </motion.button>
+              <motion.button
+                type="button"
+                whileHover={{ scale: 1.02 }}
+                className="bg-purple-500 hover:bg-purple-600 text-white font-semibold py-2 text-xl rounded-md shadow-md"
+                onClick={() => setIsRegistration(true)}
+              >
+                Create Account
+              </motion.button>
+            </div>
+          ) : (
+            <div className="flex flex-col gap-2 mt-4">
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                type="submit"
+                className="bg-purple-500 hover:bg-purple-600 text-white font-semibold py-2 text-xl rounded-md shadow-md"
+              >
+                Login
+              </motion.button>
+              <motion.button
+                type="button"
+                whileHover={{ scale: 1.02 }}
+                className="bg-purple-500 hover:bg-purple-600 text-white font-semibold py-2 text-xl rounded-md shadow-md"
+                onClick={() => setIsRegistration(true)}
+              >
+                Create Account
+              </motion.button>
+            </div>
+          )}
         </form>
       )}
     </section>

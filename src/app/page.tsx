@@ -15,9 +15,9 @@ export default function Home() {
   return (
     <main className="">
       <div
-        className={`transition-opacity duration-700 ease-in-out ${
+      /*  className={`transition-opacity duration-1200 ease-in-out ${
           visible ? "opacity-100" : "opacity-0"
-        }`}
+        }`} */
       >
         <YpprBanner />
         <LoginForm />

@@ -9,7 +9,7 @@ const api = axios.create({
 });
 
 // this is a response interceptor
-api.interceptors.response.use(
+/* api.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => {
     const status = error.response?.status;
@@ -20,6 +20,6 @@ api.interceptors.response.use(
       localStorage.removeItem("username");
     }
   }
-);
+); */
 
 export default api;
