@@ -3,6 +3,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { loginApi } from "@/api/authApi";
 import { useAuth } from "@/context/authProvider";
+import { toast } from "react-toastify";
 
 const LoginForm = () => {
   const { login, isAuthenticated, token } = useAuth();
@@ -12,7 +13,7 @@ const LoginForm = () => {
     onSuccess: (token) => {
       login(token);
     },
-    onError: (err) => alert(err.message),
+    onError: (err) => toast.error("" + err), // this can be a toast
   });
 
   const handleSubmit = (e: React.FormEvent) => {
