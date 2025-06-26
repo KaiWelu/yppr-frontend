@@ -5,12 +5,9 @@ import { useAuth } from "@/context/authProvider";
 import PostCard from "./PostCard";
 
 const Feed = () => {
-  const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } =
+  const { data, isFetchingNextPage, fetchNextPage, hasNextPage } =
     useInfinitePaginatedPosts();
   const { token, isAuthenticated } = useAuth();
-
-  if (isLoading) return <div className="p-10">LOADING!</div>;
-  /* if (isError) return <div className="p-10">FAILED TO LOAD!</div>; */
 
   return (
     <>

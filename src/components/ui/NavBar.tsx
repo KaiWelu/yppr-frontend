@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useAuth } from "@/context/authProvider";
 import { useRouter } from "next/navigation";
 import CreatePostModal from "./CreatePostModal";
-import { motion, scale } from "motion/react";
+import { motion } from "motion/react";
 
 const NavBar = () => {
   const { token, isAuthenticated, username, logout } = useAuth();
