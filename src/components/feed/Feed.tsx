@@ -14,13 +14,13 @@ const Feed = () => {
   return (
     <>
       {token && isAuthenticated && (
-        <div className="mb-22">
+        <div className="mb-6">
           <div className="mt-6 flex flex-col gap-4 mb-6">
             {data?.pages.flatMap((page) =>
               page.content.map((post) => <PostCard key={post.id} post={post} />)
             )}
           </div>
-          <div className="w-full flex justify-center mb-0">
+          <div className="w-full flex justify-center">
             {hasNextPage && (
               <motion.button
                 whileHover={{ scale: 1.2 }}
