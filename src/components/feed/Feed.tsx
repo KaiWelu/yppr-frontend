@@ -9,9 +9,6 @@ const Feed = () => {
     useInfinitePaginatedPosts();
   const { token, isAuthenticated } = useAuth();
 
-  if (isLoading) return <div className="p-10">LOADING!</div>;
-  /* if (isError) return <div className="p-10">FAILED TO LOAD!</div>; */
-
   return (
     <>
       {token && isAuthenticated && (
