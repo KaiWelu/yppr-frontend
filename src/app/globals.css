@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit&family=Comic+Neue&family=Chango&family=Quicksand&display=swap");
+
 @import "tailwindcss";
 
 :root {
@@ -8,8 +10,10 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-primary: "Outfit", "sans serif";
-  --font-comic: "Comic_Neue", "sans serif";
+  --font-primary: "Outfit", sans-serif;
+  --font-comic: "Comic Neue", sans-serif;
+  --font-chango: "Chango", cursive;
+  --font-quicksand: "Quicksand", sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {

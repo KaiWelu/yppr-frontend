@@ -18,12 +18,10 @@ const PostCard = ({ post }: { post: PostResponse }) => {
         duration: 0.5,
         scale: { type: "spring", visualDuration: 0.5, bounce: 0.1 },
       }}
-      className="bg-white/90 rounded-md py-3 px-4 mx-2 shadow-sm"
+      className="bg-white/90 rounded-md py-3 px-4 mx-2 shadow-sm lg:mx-8"
     >
-      <h2 className="text-3xl font-primary  underline decoration-purple-500 mb-1">
-        {post.title}
-      </h2>
-      <p className="font-comic font-light text-lg">{post.content}</p>
+      <h2 className="text-3xl font-primary mb-1">{post.title}</h2>
+      <p className="font-quicksand font-light text-lg">{post.content}</p>
       <p className="font-primary text-sm font-light mt-2">
         Posted at:{" " + getFormattedDate(post.createdAt)}
       </p>

@@ -9,6 +9,8 @@ import { PaginatedResponse } from "@/types/PaginatedResponse";
 import { useAuth } from "@/context/authProvider";
 import { PostResponse } from "@/types/PostResponse";
 import { PostRequest } from "@/types/PostRequest";
+import { AxiosError } from "axios"; // this is the typing for axios errors
+import { toast } from "react-toastify";
 
 const fetchPaginatedPosts = async ({
   pageParam = 0,
@@ -64,6 +66,18 @@ export const useCreatePost = (onSuccessCallback?: () => void) => {
       queryClient.invalidateQueries({ queryKey: ["paginated-posts"] }); // this will invalidate and refetch after creation
       if (onSuccessCallback) onSuccessCallback(); // this will call a callback function on success
     },
+    onError: (err: AxiosError) => {
+      // this ensures correct typing of the error response
+      const errorData = err.response?.data as Record<string, string>;
+      console.log(errorData);
+      if (errorData && typeof errorData === "object") {
+        Object.entries(errorData).forEach((message) => {
+          toast.error(message[1]);
+        });
+      } else {
+        toast.error("An unexpected error occured!");
+      }
+    },
   });
 };
 
@@ -96,6 +110,18 @@ export const useUpdatePost = (onSuccessCallback?: () => void) => {
       queryClient.invalidateQueries({ queryKey: ["paginated-posts"] });
       if (onSuccessCallback) onSuccessCallback(); // this will call a callback function on success
     },
+    onError: (err: AxiosError) => {
+      // this ensures correct typing of the error response
+      const errorData = err.response?.data as Record<string, string>;
+      console.log(errorData);
+      if (errorData && typeof errorData === "object") {
+        Object.entries(errorData).forEach((message) => {
+          toast.error(message[1]);
+        });
+      } else {
+        toast.error("An unexpected error occured!");
+      }
+    },
   });
 };
 
@@ -116,6 +142,7 @@ export const useDeletePost = (onSuccessCallback?: () => void) => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["paginated-posts"] });
       if (onSuccessCallback) onSuccessCallback(); // this will call a callback function on success
+      toast.info("Post deleted!");
     },
   });
 };
