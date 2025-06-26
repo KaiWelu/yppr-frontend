@@ -52,12 +52,12 @@ const NavBar = () => {
             ease: "easeInOut",
           }}
         >
-          <p className="text-xl">New Post</p>
+          <p className="text-xl hidden sm:block">New Post</p>
           <motion.div whileHover={{ scale: 1.2 }}>
             <SquarePlus
               size={32}
               strokeWidth={1.7}
-              className="text-purple-500 hover:text-pink-200"
+              className="text-purple-500 hover:text-purple-600"
             />
           </motion.div>
         </motion.button>

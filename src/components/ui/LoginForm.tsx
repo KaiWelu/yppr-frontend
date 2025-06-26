@@ -7,15 +7,30 @@ import { toast } from "react-toastify";
 import { motion } from "motion/react";
 import { useState } from "react";
 import { AxiosError } from "axios";
+import { useRegister } from "@/hooks/useRegister";
 
 const LoginForm = () => {
-  const { login, logout, isAuthenticated, token } = useAuth();
+  const { login, isAuthenticated, token } = useAuth();
   const [isRegistration, setIsRegistration] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  // this is the registration hook
+  const { mutate: register } = useRegister(() => {
+    /* console.log("Data in mutate" + data.name); */
+    setIsRegistration(false);
+    setPassword("");
+    setEmail("");
+  });
 
   const mutation = useMutation({
     mutationFn: loginApi,
     onSuccess: (token) => {
       login(token);
+      setPassword("");
+      setName("");
+      setEmail("");
     },
     onError: (err: AxiosError) => {
       // this ensures correct typing of the error response
@@ -28,6 +43,11 @@ const LoginForm = () => {
       }
     },
   });
+
+  const handleRegistration = (e: React.FormEvent) => {
+    e.preventDefault();
+    register({ name, email, password });
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,6 +74,8 @@ const LoginForm = () => {
             name="username"
             placeholder="Username"
             className=" py-2 px-1 border-b-1 border-purple-500"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
           {isRegistration && !isAuthenticated && !token && (
             <motion.input
@@ -63,6 +85,8 @@ const LoginForm = () => {
               name="email"
               placeholder="E-Mail"
               className=" py-2 px-1 border-b-1 border-purple-500"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           )}
           <input
@@ -70,6 +94,8 @@ const LoginForm = () => {
             placeholder="Password"
             type="password"
             className="py-2 px-1 border-b-1 border-purple-500"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
           {isRegistration ? (
             <div className="flex flex-col gap-2 mt-4">
@@ -85,9 +111,9 @@ const LoginForm = () => {
                 type="button"
                 whileHover={{ scale: 1.02 }}
                 className="bg-purple-500 hover:bg-purple-600 text-white font-semibold py-2 text-xl rounded-md shadow-md"
-                onClick={() => setIsRegistration(true)}
+                onClick={handleRegistration}
               >
-                Create Account
+                Create New
               </motion.button>
             </div>
           ) : (
