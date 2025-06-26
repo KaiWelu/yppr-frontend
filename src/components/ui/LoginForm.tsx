@@ -6,14 +6,18 @@ import { useAuth } from "@/context/authProvider";
 import { toast } from "react-toastify";
 
 const LoginForm = () => {
-  const { login, isAuthenticated, token } = useAuth();
+  const { login, logout, isAuthenticated, token } = useAuth();
 
   const mutation = useMutation({
     mutationFn: loginApi,
     onSuccess: (token) => {
       login(token);
     },
-    onError: (err) => toast.error("" + err), // this can be a toast
+    onError: (err) => {
+      logout();
+      console.log(err);
+      toast.error("Something login related went wrong lol");
+    }, // this can be a toast
   });
 
   const handleSubmit = (e: React.FormEvent) => {
