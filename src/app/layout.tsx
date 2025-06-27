@@ -28,6 +28,7 @@ export default function RootLayout({
         <Providers>
           <AuthProvider>
             <ToastContainer />
+            {/*  <ToastContainer /> */}
             <div className="min-h-screen w-full flex justify-center bg-linear-to-bl/longer from-yellow-200 via-orange-200 to-indigo-300">
               <div className="w-full md:w-3/4 lg:w-1/2">
                 <NavBar />

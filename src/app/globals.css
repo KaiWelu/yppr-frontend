@@ -5,6 +5,17 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  .Toastify__toast--error {
+    @apply font-primary text-lg rounded-md shadow-md;
+  }
+  .Toastify__toast--info {
+    @apply font-primary text-lg rounded-md shadow-md;
+  }
+  --toastify-color-progress-error: var(--color-purple-400);
+  --toastify-icon-color-error: var(--color-purple-400);
+
+  --toastify-color-progress-info: var(--color-purple-400);
+  --toastify-icon-color-info: var(--color-purple-400);
 }
 
 @theme inline {
@@ -22,6 +33,13 @@
     --foreground: #ededed;
   }
 }
+
+@layer toasts {
+  .Toastify__toast--error {
+    @apply bg-red-500 text-white;
+  }
+}
+
 @layer components {
   .gradient-text {
   }
