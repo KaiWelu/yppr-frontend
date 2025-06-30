@@ -7,8 +7,7 @@ import { motion } from "motion/react";
 import PostCard from "./PostCard";
 
 const Feed = () => {
-  const { data, isFetchingNextPage, fetchNextPage, hasNextPage } =
-    useInfinitePaginatedPosts();
+  const { data, fetchNextPage, hasNextPage } = useInfinitePaginatedPosts();
   const { token, isAuthenticated } = useAuth();
 
   return (
