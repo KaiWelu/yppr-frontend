@@ -31,7 +31,9 @@ export default function RootLayout({
             {/*  <ToastContainer /> */}
             <div className="min-h-screen w-full flex justify-center bg-linear-to-bl/longer from-yellow-200 via-orange-200 to-indigo-300">
               <div className="w-full md:w-3/4 lg:w-1/2">
-                <NavBar />
+                {<NavBar />}
+                {/* Feed needs to move. This will lead to hydration errors because of localstorage use and
+                custom hooks!!! */}
                 <Feed />
 
                 {children}
