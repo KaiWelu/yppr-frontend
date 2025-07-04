@@ -18,7 +18,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const login = (jwt: string) => {
     localStorage.setItem("token", jwt);
-
     setUsername(getUsernameFromToken(jwt));
     localStorage.setItem("username", getUsernameFromToken(jwt) || "");
     setToken(jwt);

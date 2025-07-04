@@ -73,7 +73,7 @@ const LoginForm = () => {
           <input
             name="username"
             placeholder="Username"
-            className=" py-2 px-1 border-b-1 border-purple-500"
+            className=" py-2 px-1 border-b-1 border-purple-500 focus:outline-0"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
@@ -84,7 +84,7 @@ const LoginForm = () => {
               transition={{ duration: 0.3, ease: "easeOut" }}
               name="email"
               placeholder="E-Mail"
-              className=" py-2 px-1 border-b-1 border-purple-500"
+              className=" py-2 px-1 border-b-1 border-purple-500 focus:outline-0"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -93,7 +93,7 @@ const LoginForm = () => {
             name="password"
             placeholder="Password"
             type="password"
-            className="py-2 px-1 border-b-1 border-purple-500"
+            className="py-2 px-1 border-b-1 border-purple-500 focus:outline-0"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
